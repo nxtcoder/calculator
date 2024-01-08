@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    border: 1px solid #444;
+    background-color: #ddd;
+    color: #444;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.device {
+    border: 1px solid #f00;
+    background-color: #fdd;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    padding: 20px;
+
+}
+
+.screen {
+    border: 1px solid #0f0;
+    background-color: #dfd;
+    display: flex;
+    height: 50px;
+    width: 400px;
+
+}
+
+.keypad {
+    border: 1px solid #00f;
+    background-color: #ddf;
+    height: 400px;
+    width: 400px;
+    display: flex;
+}
+
+.keys {
+    border: 1px solid #f00;
+    background-color: #fdd;
+    width: 300px;
+    height: 400px;
+}
+
+.clear {
+    border: 1px solid #444;
+    background-color: #ddd;
+    height: 100px;
+    display: flex;
+}
+
+#clear {
+    width: 150px;
+}
+
+.digits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 300px;
+}
+
+.operators {
+    border: 1px solid #0f0;
+    background-color: #dfd;
+    height: 400px;
+    width: 100px;
+    display: grid;
+}
