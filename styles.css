@@ -3,71 +3,69 @@
     padding: 0;
 }
 
+:root {
+    --grey: #aaa
+}
+
+body {
+    background-color: #111827;
+}
+
 h1 {
-    border: 1px solid #444;
-    background-color: #ddd;
-    color: #444;
+    color: white;
     display: flex;
     justify-content: center;
     padding: 10px;
 }
 
 .device {
-    border: 1px solid #f00;
-    background-color: #fdd;
     display: flex;
     align-items: center;
     flex-direction: column;
-
     padding: 20px;
-
 }
 
 .screen {
-    border: 1px solid #0f0;
-    background-color: #dfd;
-    display: flex;
-    height: 50px;
+    color: green;
+    background-color: #aaa;
+    height: 100px;
     width: 400px;
-
+    border: 1px solid var(--grey);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
 }
 
 .keypad {
-    border: 1px solid #00f;
-    background-color: #ddf;
     height: 400px;
     width: 400px;
-    display: flex;
-}
-
-.keys {
-    border: 1px solid #f00;
-    background-color: #fdd;
-    width: 300px;
-    height: 400px;
-}
-
-.clear {
-    border: 1px solid #444;
-    background-color: #ddd;
-    height: 100px;
-    display: flex;
-}
-
-#clear {
-    width: 150px;
-}
-
-.digits {
+    border: 1px solid var(--grey);
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    height: 300px;
+    grid-template-columns: repeat(4, 1fr);
 }
 
-.operators {
-    border: 1px solid #0f0;
-    background-color: #dfd;
-    height: 400px;
-    width: 100px;
-    display: grid;
+button {
+    color: white;
+    margin: 12px;
+    background-color: #172036;
+    border-color: transparent;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: #273046;
+}
+
+button:active {
+    background-color: #121531;
+    border-color: #172036;
+    border-style: double;
+}
+
+.history,
+.current {
+    padding: 0 10px;
 }
