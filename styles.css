@@ -68,4 +68,5 @@ button:active {
 .history,
 .current {
     padding: 0 10px;
+    height: 40px;
 }

@@ -24,20 +24,24 @@ decimal.addEventListener("click", function(){
     addDecimal()
 })
 
-//need fix
 clear.addEventListener("click", function(){
-    historyScreen = ""
-    currentScreen = ""
+    historyValue = ""
+    currentValue = ""
     operator = ""
     historyScreen.textContent = ""
     currentScreen.textContent = ""
-    console.log("clear")
+})
+
+backspace.addEventListener("click", function(){
+    currentValue = currentValue.slice(0, -1)
+    currentScreen.textContent = currentScreen.textContent.slice(0, -1)
 })
 
 equal.addEventListener("click", function(){
     operate()
     historyScreen.textContent = ""
     currentScreen.textContent = historyValue
+    currentValue = ""
 })
 
 function operate(){
@@ -49,7 +53,6 @@ function operate(){
     else if(operator === "*"){historyValue *= currentValue}
     else if(operator === "/"){historyValue /= currentValue}
     else {console.log("operation error")}
-    console.log(historyValue)
 }
 
 function handleNumber(number){
@@ -59,7 +62,7 @@ function handleNumber(number){
 function handleOperator(op){
     operator = op
     historyValue = currentValue
-    currentValue = ''
+    currentValue = ""
 }
 
 function addDecimal(){
