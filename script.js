@@ -6,67 +6,99 @@ let decimal = document.querySelector(".decimal")
 let equal = document.querySelector(".equal")
 let historyScreen = document.querySelector(".history")
 let currentScreen = document.querySelector(".current")
-
-let operator,historyValue,currentValue = "";
+let num1,num2 = ''
+let opr = null
+let resetMain = false
 
 digits.forEach((digit) => digit.addEventListener("click", function(e){
-    handleNumber(e.target.textContent)
-    currentScreen.textContent = currentValue
+    appendNumber(e.target.textContent)
 }))
 
 operators.forEach((op) => op.addEventListener("click", function(e){
     handleOperator(e.target.textContent)
-    historyScreen.textContent = historyValue + " " + operator
-    currentScreen.textContent = currentValue
 }))
 
+equal.addEventListener("click", function(){
+    evaluate()
+})
+
 decimal.addEventListener("click", function(){
-    addDecimal()
+    appendDecimal()
 })
 
 clear.addEventListener("click", function(){
-    historyValue = ""
-    currentValue = ""
-    operator = ""
+    num1 = ""
+    num2 = ""
+    opr = null
     historyScreen.textContent = ""
-    currentScreen.textContent = ""
+    currentScreen.textContent = "0"
 })
 
 backspace.addEventListener("click", function(){
-    currentValue = currentValue.slice(0, -1)
-    currentScreen.textContent = currentScreen.textContent.slice(0, -1)
+    currentScreen.textContent = currentScreen.textContent.toString().slice(0, -1)
 })
 
-equal.addEventListener("click", function(){
-    operate()
-    historyScreen.textContent = ""
-    currentScreen.textContent = historyValue
-    currentValue = ""
-})
+const add = (a,b) => a+b;
+const subtract = (a,b) => a-b;
+const mutiply = (a,b) => a*b;
+const divide = (a,b) => a/b;
 
-function operate(){
-    historyValue = Number(historyValue)
-    currentValue = Number(currentValue)
-
-    if(operator === "+"){historyValue += currentValue}
-    else if(operator === "-"){historyValue -= currentValue}
-    else if(operator === "*"){historyValue *= currentValue}
-    else if(operator === "/"){historyValue /= currentValue}
-    else {console.log("operation error")}
+function resetCurrentScreen (){
+    currentScreen.textContent = '';
+    resetMain = false;
 }
 
-function handleNumber(number){
-    currentValue += number
+function appendNumber(num){
+    if(currentScreen.textContent === '0' || resetMain){
+        resetCurrentScreen();
+    }
+    currentScreen.textContent += num;
 }
 
-function handleOperator(op){
-    operator = op
-    historyValue = currentValue
-    currentValue = ""
+function handleOperator(oper){
+    if(opr !== null) evaluate()
+    num1 = currentScreen.textContent;
+    opr = oper;
+    historyScreen.textContent = `${num1} ${opr}`;
+    resetMain = true;
 }
 
-function addDecimal(){
-    if (!currentValue.includes(".")){
-        currentValue += "."
+function evaluate(){
+    if(opr === null || resetMain) return
+    if(opr === '/' && mainScreen.textContent === '0'){
+        console.log("num / 0 ?")
+        return 
+    }
+    num2 = currentScreen.textContent;
+    currentScreen.textContent = roundResult(operate(opr, num1, num2));
+    historyScreen.textContent = `${num1} ${opr} ${num2}`
+    opr = null;
+}
+
+function roundResult(num){
+    return Math.round(num*1000)/1000;
+}
+
+function appendDecimal(){
+    if(resetMain) resetCurrentScreen();
+    if(currentScreen.textContent === ''){
+        currentScreen.textContent='0';
+    }
+    if(currentScreen.textContent.includes('.'))return 
+    currentScreen.textContent += '.'
+}
+
+function operate(operator, a, b){
+    a = Number(a)
+    b = Number(b)
+    switch(operator){
+        case '+':
+            return add(a,b);
+        case '-':
+            return subtract(a,b);
+        case 'x':
+            return mutiply(a,b);
+        case "/":
+            return divide(a,b);
     }
 }
